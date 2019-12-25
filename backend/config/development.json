@@ -1,0 +1,9 @@
+{
+    "dbURL": "mongodb://nahid597:nahid123@ds257668.mlab.com:57668/chatroom",
+    "sessionSecret": "sadjfosjfojsadoffksadofj",
+    "fb": {
+        "appId": "2437831019864366",
+        "appSecret": "1c705be9b4bc484b1be3f93f34763f32",
+        "callbackURL": "http://localhost:8080/auth/facebook/callback"
+    }
+}

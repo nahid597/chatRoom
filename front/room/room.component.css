@@ -1,0 +1,129 @@
+.card {
+    margin-top: 50px;
+}
+
+
+/* .container {
+    /* border: 1px solid blanchedalmond;
+} */
+
+.card-title {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.imgcontainer {
+    height: 50px;
+}
+
+.imgset {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+.imgset2 {
+    height: 60px;
+    width: 60px;
+    border-radius: 5px;
+}
+
+.username {
+    float: left;
+    margin: 20px;
+}
+
+#logout {
+    background-color: rgb(143, 243, 243);
+    margin-right: 10px;
+}
+
+#morechatrooms {
+    background-color: rgb(143, 243, 243);
+}
+
+.fixedchatroom {
+    margin-top: 20px;
+    background-color: darkcyan;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+}
+
+img {
+    float: left;
+    margin-top: 5px;
+}
+
+.msg {
+    background-color: rgb(222, 238, 238);
+    padding: 5px;
+    width: 80%;
+    height: auto;
+    border-radius: 8px;
+    float: left;
+    margin-left: 5px;
+    margin-top: 7px;
+}
+
+.userimgset {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.usernamesort {
+    text-align: center;
+    /* margin-top: 10px; */
+    float: left;
+}
+
+.chatside {
+    height: 300px;
+    width: 60%;
+    border: 1px solid rgb(238, 222, 222);
+    float: left;
+    margin: 5px;
+    overflow-x: hidden;
+    overflow-x: auto;
+    text-align: justify;
+}
+
+.useractiveside {
+    height: 400px;
+    width: 35%;
+    float: right;
+    background-color: rgb(248, 244, 244);
+    padding: 3px;
+    overflow-x: hidden;
+    overflow-x: auto;
+    text-align: justify;
+}
+
+.activeuserimg {
+    float: left;
+    width: 100%;
+    height: auto;
+}
+
+.activeusername {
+    width: 100%;
+    height: auto;
+    float: left;
+}
+
+#activeusername2 {
+    float: left;
+    margin-top: 10px;
+}
+
+.row {
+    margin-top: 4px;
+}
+
+.writemsgfield {
+    height: 150px;
+    width: 60%;
+}

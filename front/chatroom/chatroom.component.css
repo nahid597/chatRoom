@@ -1,0 +1,49 @@
+.card {
+    margin: 20%;
+}
+
+.card-title {
+    text-align: center;
+}
+
+.imgcontainer {
+    height: 50px;
+}
+
+.imgset {
+    height: 60px;
+    width: 60px;
+}
+
+.username {
+    float: right;
+}
+
+#createroom {
+    margin-top: 20px;
+    float: left;
+}
+
+#inputroom {
+    margin-top: 20px;
+}
+
+.listroom {
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    width: 90%;
+    height: 25px;
+    background: whitesmoke;
+    display: inline-block;
+    padding: 5px;
+}
+
+li:hover {
+    background-color: rgb(190, 204, 204);
+}
