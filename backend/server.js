@@ -7,6 +7,8 @@ const config = require('../backend/config/config');
 const connectMongo = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 // const Schema = mongoose.Schema();
+const passport = require('passport');
+const facebookStrategy = require('passport-facebook').Strategy
 
 const port = process.env.PORT || 8080;
 
@@ -28,6 +30,8 @@ app.use(express.static(path.join(__dirname, '../front/chatroom')));
 app.use(express.static(path.join(__dirname, '../front/room')));
 app.use(express.static(path.join(__dirname, '../front')));
 app.use(cookieParser());
+
+// passport middleware
 
 var env = process.env.NODE_ENV || 'development';
 
@@ -51,9 +55,11 @@ if (env === 'development') {
 
 }
 
+app.use(passport.initialize());
+app.use(passport.session());
 
-
-require('./router/router')(express, app, path);
+require('./auth/passportAuth')(passport, facebookStrategy, config, mongoose);
+require('./router/router')(express, app, path, passport);
 
 app.listen(port, function() {
     console.log('server is running on port: ' + port);
