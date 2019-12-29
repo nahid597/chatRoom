@@ -47,3 +47,14 @@ li {
 li:hover {
     background-color: rgb(190, 204, 204);
 }
+
+.roomnameside {
+    height: 300px;
+    width: 60%;
+    border: 1px solid rgb(238, 222, 222);
+    float: left;
+    margin: 5px;
+    overflow-x: hidden;
+    overflow-x: auto;
+    text-align: justify;
+}

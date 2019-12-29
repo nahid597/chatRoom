@@ -11,6 +11,28 @@
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <link rel="stylesheet" href="room.component.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="http://localhost:8080/socket.io/socket.io.js"></script>
+    <script>
+        $(function() {
+            const host = '{{config.host}}';
+            var messages = io.connect(host + '/messages');
+            var room_number = '{{room_number}}';
+            var username = '{{user.fullName}}';
+            var profilePic = '{{user.profilePic}}';
+
+            //console.log('room number of event ' + room_number);
+
+            messages.on('connect', function() {
+                console.log('connection established!!');
+                messages.emit('joinroom', {
+                    username: username,
+                    profilePic: profilePic,
+                    room_number: room_number
+                })
+            })
+        })
+    </script>
 </head>
 
 <body>
@@ -24,13 +46,13 @@
         <hr>
 
         <div class="imgcontainer">
-            <img src="../img/nahid.jpg" class="imgset2">
-            <h5 class="username"> <b>Nahid Hasan  | <a id="logout" href="#">Logout  </a><a id="morechatrooms" href="#"> More Chatrooms</a id=></b></h5>
+            <img src="{{user.profilePic}}" class="imgset2">
+            <h5 class="username"> <b>{{user.fullName}}  | <a id="logout" href="/logout">Logout  </a><a id="morechatrooms" href="/chatrooms"> More Chatrooms</a id=></b></h5>
         </div>
 
         <div class="fixedchatroom">
             <b>Current ChatRoom </b>
-            <h4><b>Node js</b></h4>
+            <h4><b>{{room_name}}</b></h4>
         </div>
 
         <div class="chatside">

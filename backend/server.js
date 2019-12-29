@@ -8,7 +8,9 @@ const connectMongo = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 // const Schema = mongoose.Schema();
 const passport = require('passport');
-const facebookStrategy = require('passport-facebook').Strategy
+const facebookStrategy = require('passport-facebook').Strategy;
+
+const rooms = [];
 
 const port = process.env.PORT || 8080;
 
@@ -59,9 +61,21 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./auth/passportAuth')(passport, facebookStrategy, config, mongoose);
-require('./router/router')(express, app, path, passport);
+require('./router/router')(express, app, path, passport, config, rooms);
 
-app.listen(port, function() {
-    console.log('server is running on port: ' + port);
+// app.listen(port, function() {
+//     console.log('server is running on port: ' + port);
+//     console.log('mode ' + env);
+// })
+
+app.set('port', process.env.PORT || 8080);
+
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
+
+require('./socket/socket.io')(io, rooms);
+
+server.listen(app.get('port'), function() {
+    console.log('server is running on port: ' + app.get('port'));
     console.log('mode ' + env);
 })
