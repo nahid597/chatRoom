@@ -28,8 +28,8 @@
 
             socket.on('roomupdate', function(data) {
                 var procData = JSON.parse(data);
-                var procData2 = JSON.stringify(data);
-                console.log('update event ' + data);
+                // var procData2 = JSON.stringify(data);
+                // console.log('update event ' + data);
                 $('.listroom').html('');
                 for (var i in procData) {
                     var str = '<a href="room/' + procData[i].room_number + '">' +

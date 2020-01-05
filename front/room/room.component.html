@@ -25,13 +25,108 @@
 
             messages.on('connect', function() {
                 console.log('connection established!!');
+
                 messages.emit('joinroom', {
                     username: username,
                     profilePic: profilePic,
                     room_number: room_number
                 })
+            });
+
+            $(document).on('keyup', '#newMessage', function(e) {
+                if (e.which === 13 && $(this).val() != '') {
+                    //console.log('enter pressed!');
+                    messages.emit('newMessage', {
+                        room_number: room_number,
+                        username: username,
+                        profilePic: profilePic,
+                        messages: $(this).val()
+                    });
+
+                    updateMessage(profilePic, $(this).val());
+                    $(this).val('');
+                }
+            });
+
+            messages.on('messageFeed', function(data) {
+                var msgs = JSON.parse(data);
+
+                //$('.messages').html('');
+
+                // console.log("message data " + msgs);
+                // for (var i in msgs) {
+                //     updateMessage(msgs[i].profilePic, msgs[i].messages);
+                // }
+
+                updateMessage(msgs.profilePic, msgs.messages);
+
             })
-        })
+
+            function updateMessage(userPic, message) {
+                var str = "";
+                // str += '<li>';
+                // str += '<div class="mgsbox">';
+                // str += '<div class="pic">';
+                // str += '<img src="' + userPic + '" class="imgset">';
+                // str += '</div>';
+
+                // str += '<div class="msg">';
+                // str += '<p>' + message + '</p>';
+                // str += '</div>';
+                // str += '</div>';
+                // str += '</li>';
+
+                str += '<li>';
+                str += '<div class="row">';
+                str += '<div class="col-2">';
+                str += '<img src="' + userPic + '" class="userimgset">';
+                str += '</div>';
+                str += '<div id="messageBox" class="col-8">';
+                str += '<p>' + message + '</p>';
+                str += '</div>';
+                str += '</div>';
+                str += '</li>';
+
+                $(str).hide().prependTo('.messages').slideDown(100);
+            }
+
+            messages.on('updateUserLists', function(data) {
+
+                var userList = JSON.parse(data);
+
+                // console.log('nahid hasdan');
+
+                // console.log('user list is ' + userList);
+
+                $('.users').html('');
+
+                for (var i in userList) {
+                    var str = "";
+
+                    str += '<li>';
+                    str += '<div class="row">';
+                    str += '<div class="col-2">';
+                    str += '<img src="' + userList[i].profilePic + '" class="userimgset">';
+                    str += '</div>';
+                    str += '<div id="activeusername2" class="col-8">';
+                    str += '<h5>' + userList[i].username + '</h5>';
+                    str += '</div>';
+                    str += '</div>';
+                    str += '</li>';
+
+                    $(str).prependTo('.users');
+                }
+            })
+
+            setInterval(function() {
+                messages.emit('updateList', {
+                    room_number: room_number,
+                    username: username,
+                    profilePic: profilePic
+                });
+            }, 5 * 1000);
+
+        });
     </script>
 </head>
 
@@ -57,7 +152,7 @@
 
         <div class="chatside">
             <ul class="messages">
-                <li>
+                <!-- <li>
                     <div class="mgsbox">
                         <div class="pic">
                             <img src="../img/nahid.jpg" class="imgset">
@@ -67,46 +162,8 @@
                             <p>Hi there is first sms asfdsjaf asfsalfjosadf sadfjosadfjsafdosa dfosadfjosdafjsadfosad fsdlajfosadjf sadfosajfosajf sadfojsaofjosafd</p>
                         </div>
                     </div>
-                </li>
+                </li> -->
 
-                <li>
-                    <div class="mgsbox">
-                        <div class="pic">
-                            <img src="../img/nahid.jpg" class="imgset">
-                        </div>
-
-                        <div class="msg">
-                            <p>Hi there is first sms asfdsjaf asfsalfjosadf sadfjosadfjsafdosa dfosadfjosdafjsadfosad fsdlajfosadjf sadfosajfosajf sadfojsaofjosafd</p>
-                        </div>
-                    </div>
-                </li>
-
-                <li>
-                    <div class="mgsbox">
-                        <div class="pic">
-                            <img src="../img/nahid.jpg" class="imgset">
-                        </div>
-
-                        <div class="msg">
-                            <p>Hi there It is a good platform to learn programming. It is an educational website. Prepare for the Recruitment drive of product based companies like Microsoft, Amazon, Adobe etc with a free online placement preparation course.
-                                The course focuses on various MCQ's & Coding question likely to be asked in the interviews & make your upcoming placement season efficient and successful. Also, any geeks can help other geeks by writing articles on the
-                                GeeksforGeeks, publishing articles follow few steps that are Articles that need little modification/improvement from reviewers are published first. To quickly get your articles reviewed, please refer existing articles,
-                                their formatting style, coding style, and try to make yis first sms asfdsjaf asfsalfjosadf sadfjosadfjsafdosa dfosadfjosdafjsadfosad fsdlajfosadjf sadfosajfosajf sadfojsaofjosafd</p>
-                        </div>
-                    </div>
-                </li>
-
-                <li>
-                    <div class="mgsbox">
-                        <div class="pic">
-                            <img src="../img/nahid.jpg" class="imgset">
-                        </div>
-
-                        <div class="msg">
-                            <p>Hi </p>
-                        </div>
-                    </div>
-                </li>
 
             </ul>
 
@@ -125,45 +182,13 @@
 
                 </li> -->
 
-                <li>
-                    <div class="row">
-                        <div class="col-2">
-                            <img src="../img/nahid.jpg" class="userimgset">
-                        </div>
-                        <div id="activeusername2" class="col-8">
-                            <h5>Nahid Hasan milon</h5>
-                        </div>
-                    </div>
-                </li>
-
-                <li>
-                    <div class="row">
-                        <div class="col-2">
-                            <img src="../img/nahid.jpg" class="userimgset">
-                        </div>
-                        <div id="activeusername2" class="col-8">
-                            <h5>Nahid Hasan milon</h5>
-                        </div>
-                    </div>
-                </li>
-
-                <li>
-                    <div class="row">
-                        <div class="col-2">
-                            <img src="../img/nahid.jpg" class="userimgset">
-                        </div>
-                        <div id="activeusername2" class="col-8">
-                            <h5>Nahid Hasan milon</h5>
-                        </div>
-                    </div>
-                </li>
 
             </ul>
 
         </div>
 
         <div class="writemsgfield">
-            <input autocomplete="off" class="form-control" type="text" placeholder="Type your message and press enter">
+            <input id="newMessage" autocomplete="off" class="form-control" type="text" placeholder="Type your message and press enter">
         </div>
 
 

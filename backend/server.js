@@ -11,6 +11,8 @@ const passport = require('passport');
 const facebookStrategy = require('passport-facebook').Strategy;
 
 const rooms = [];
+const msgs = [];
+const userList = [];
 
 const port = process.env.PORT || 8080;
 
